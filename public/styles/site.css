@@ -1,0 +1,163 @@
+:root {
+  color-scheme: dark;
+  --bg: #07111b;
+  --bg-deep: #02060b;
+  --surface: rgba(7, 18, 28, 0.72);
+  --surface-border: rgba(176, 218, 200, 0.18);
+  --text: #eff7f2;
+  --muted: rgba(239, 247, 242, 0.72);
+  --accent: #b9f0be;
+  --accent-warm: #f6c98f;
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(30, 91, 73, 0.34), transparent 35%),
+    radial-gradient(circle at 75% 25%, rgba(246, 201, 143, 0.2), transparent 24%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.background-canvas,
+.background-glow {
+  position: fixed;
+  inset: 0;
+}
+
+.background-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.background-glow {
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(185, 240, 190, 0.12), transparent 18%),
+    radial-gradient(circle at 15% 20%, rgba(246, 201, 143, 0.08), transparent 20%);
+  mix-blend-mode: screen;
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.hero,
+.contacts {
+  width: min(100%, 42rem);
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border: 1px solid var(--surface-border);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow,
+.section-kicker,
+.contact-label {
+  margin: 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+.hero h1,
+.contacts h2 {
+  margin: 0.55rem 0 0;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.hero h1 {
+  font-size: clamp(3.4rem, 11vw, 7.5rem);
+}
+
+.contacts h2 {
+  font-size: clamp(2rem, 6vw, 3.1rem);
+}
+
+.lede {
+  margin: 1rem 0 0;
+  max-width: 24rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.section-head {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-item a {
+  color: var(--text);
+  font-size: clamp(1rem, 2.6vw, 1.15rem);
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.contact-item a:hover,
+.contact-item a:focus-visible {
+  color: var(--accent-warm);
+  transform: translateX(0.2rem);
+}
+
+@media (max-width: 720px) {
+  body {
+    overflow: auto;
+  }
+
+  .shell {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,8 +1,16 @@
-shade30.github.io
-=================
+# shade30.github.io
 
-Personal site
+Minimal personal homepage built with Eleventy.
 
-Based on Jekyll-Bootstrap: <http://jekyllbootstrap.com>
+## Development
 
-Theme by Tom Preston-Warner <http://tom.preston-warner.com/>
+```bash
+npm install
+npm run dev
+```
+
+## Production build
+
+```bash
+npm run build
+```

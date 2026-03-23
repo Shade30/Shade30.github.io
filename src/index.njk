@@ -1,0 +1,23 @@
+---
+layout: layout.njk
+---
+<section class="hero">
+  <p class="eyebrow">Personal page</p>
+  <h1>{{ site.intro }}</h1>
+  <p class="lede">{{ site.description }}</p>
+</section>
+
+<section class="contacts" aria-labelledby="contacts-title">
+  <div class="section-head">
+    <p class="section-kicker">Reach out</p>
+    <h2 id="contacts-title">Contacts</h2>
+  </div>
+  <ul class="contact-list">
+    {% for contact in site.contacts %}
+      <li class="contact-item">
+        <span class="contact-label">{{ contact.label }}</span>
+        <a href="{{ contact.href }}" target="_blank" rel="noreferrer">{{ contact.value }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
