@@ -7,13 +7,15 @@ if (canvas) {
     x: window.innerWidth * 0.5,
     y: window.innerHeight * 0.58,
     active: false,
-    lastSpawn: 0
+    lastSpawn: 0,
+    lastMove: 0
   };
 
   const config = {
     maxTrees: 22,
     spawnInterval: 90,
-    fadeAlpha: 0.085
+    fadeAlpha: 0.085,
+    activeWindow: 140
   };
 
   function resize() {
@@ -52,7 +54,11 @@ if (canvas) {
   }
 
   function spawnFromPointer(now) {
-    if (!pointer.active || now - pointer.lastSpawn < config.spawnInterval) {
+    if (
+      !pointer.active ||
+      now - pointer.lastMove > config.activeWindow ||
+      now - pointer.lastSpawn < config.spawnInterval
+    ) {
       return;
     }
 
@@ -137,17 +143,18 @@ if (canvas) {
     pointer.x = clientX;
     pointer.y = clientY;
     pointer.active = true;
+    pointer.lastMove = performance.now();
     updateGlow();
   }
 
   resize();
   updateGlow();
 
-  canvas.addEventListener("mousemove", (event) => {
+  window.addEventListener("pointermove", (event) => {
     movePointer(event.clientX, event.clientY);
   });
 
-  canvas.addEventListener(
+  window.addEventListener(
     "touchmove",
     (event) => {
       const touch = event.touches[0];
@@ -160,15 +167,17 @@ if (canvas) {
     { passive: true }
   );
 
-  window.addEventListener("resize", resize);
+  window.addEventListener("pointerleave", () => {
+    pointer.active = false;
+  });
 
-  for (let index = 0; index < 5; index += 1) {
-    createTree(
-      window.innerWidth * (0.12 + index * 0.18),
-      window.innerHeight * (0.92 + Math.random() * 0.04),
-      0.7
-    );
-  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      pointer.active = false;
+    }
+  });
+
+  window.addEventListener("resize", resize);
 
   requestAnimationFrame(frame);
 }

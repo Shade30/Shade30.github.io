@@ -1,10 +1,32 @@
 ---
-layout: layout.njk
+{
+  "layout": "layout.njk",
+  "title": "Sergey Fedorov",
+  "description": "Engineer focused on building clean, reliable software.",
+  "intro": "Hi, I'm Sergey.",
+  "contacts": [
+    {
+      "label": "GitHub",
+      "value": "Shade30",
+      "href": "https://github.com/Shade30"
+    },
+    {
+      "label": "Telegram",
+      "value": "@shade30",
+      "href": "https://t.me/shade30"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "sergey-fedorov",
+      "href": "https://www.linkedin.com/in/sergey-fedorov/"
+    }
+  ]
+}
 ---
 <section class="hero">
   <p class="eyebrow">Personal page</p>
-  <h1>{{ site.intro }}</h1>
-  <p class="lede">{{ site.description }}</p>
+  <h1>{{ intro }}</h1>
+  <p class="lede">{{ description }}</p>
 </section>
 
 <section class="contacts" aria-labelledby="contacts-title">
@@ -13,7 +35,7 @@ layout: layout.njk
     <h2 id="contacts-title">Contacts</h2>
   </div>
   <ul class="contact-list">
-    {% for contact in site.contacts %}
+    {% for contact in contacts %}
       <li class="contact-item">
         <span class="contact-label">{{ contact.label }}</span>
         <a href="{{ contact.href }}" target="_blank" rel="noreferrer">{{ contact.value }}</a>
