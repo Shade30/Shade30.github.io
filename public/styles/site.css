@@ -9,6 +9,29 @@
   --accent: #b9f0be;
   --accent-warm: #f6c98f;
   --shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+  --tree-ink-rgb: 16, 19, 23;
+  --tree-highlight-rgb: 174, 191, 170;
+  --canvas-fade-rgb: 2, 6, 11;
+  --glow-primary: rgba(185, 240, 190, 0.12);
+  --glow-secondary: rgba(246, 201, 143, 0.08);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4efe6;
+  --bg-deep: #e0d5c3;
+  --surface: rgba(255, 251, 244, 0.76);
+  --surface-border: rgba(89, 109, 88, 0.18);
+  --text: #1d241f;
+  --muted: rgba(29, 36, 31, 0.68);
+  --accent: #3b7058;
+  --accent-warm: #a96c39;
+  --shadow: 0 28px 60px rgba(101, 79, 54, 0.16);
+  --tree-ink-rgb: 84, 70, 52;
+  --tree-highlight-rgb: 150, 126, 92;
+  --canvas-fade-rgb: 244, 239, 230;
+  --glow-primary: rgba(120, 167, 135, 0.12);
+  --glow-secondary: rgba(201, 146, 84, 0.1);
 }
 
 * {
@@ -51,9 +74,45 @@ a {
 .background-glow {
   pointer-events: none;
   background:
-    radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(185, 240, 190, 0.12), transparent 18%),
-    radial-gradient(circle at 15% 20%, rgba(246, 201, 143, 0.08), transparent 20%);
+    radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), var(--glow-primary), transparent 18%),
+    radial-gradient(circle at 15% 20%, var(--glow-secondary), transparent 20%);
   mix-blend-mode: screen;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  font: inherit;
+  cursor: pointer;
+}
+
+.theme-toggle__light,
+.theme-toggle__dark {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+:root[data-theme="dark"] .theme-toggle__dark,
+:root[data-theme="light"] .theme-toggle__light {
+  color: var(--accent-warm);
+}
+
+:root[data-theme="dark"] .theme-toggle__light,
+:root[data-theme="light"] .theme-toggle__dark {
+  color: var(--muted);
 }
 
 .shell {
@@ -149,6 +208,11 @@ a {
 @media (max-width: 720px) {
   body {
     overflow: auto;
+  }
+
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
   }
 
   .shell {
