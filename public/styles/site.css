@@ -45,7 +45,7 @@ body {
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at top, rgba(30, 91, 73, 0.34), transparent 35%),
     radial-gradient(circle at 75% 25%, rgba(246, 201, 143, 0.2), transparent 24%),
@@ -206,10 +206,6 @@ a {
 }
 
 @media (max-width: 720px) {
-  body {
-    overflow: auto;
-  }
-
   .theme-toggle {
     top: 1rem;
     right: 1rem;
